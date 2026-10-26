@@ -73,7 +73,7 @@ npm run build       # creates dist/chrome, dist/firefox and the two zip files
 2. Choose `dist/firefox/manifest.json`.
 3. Temporary add-ons disappear when Firefox closes. For a permanent install you need the signed release from the add-on store (not published yet).
 
-Release zips (`gosast-0.1.0-chrome.zip`, `gosast-0.1.0-firefox.zip`) are attached to each [GitHub release](https://github.com/mrzroot/gosast/releases).
+Release zips (`gosast-0.1.1-chrome.zip`, `gosast-0.1.1-firefox.zip`) are attached to each [GitHub release](https://github.com/mrzroot/gosast/releases).
 
 ## 🧪 Tests
 

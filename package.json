@@ -1,6 +1,6 @@
 {
   "name": "gosast",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "A calm browser toy: tear the page you are looking at into paper strips, sweep them, glue them back.",
   "license": "MIT",

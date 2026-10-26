@@ -74,7 +74,7 @@ npm run build       # dist/chrome و dist/firefox و دو فایل zip را می
 ۲. فایل `dist/firefox/manifest.json` را انتخاب کنید.
 ۳. افزونهٔ موقت با بسته شدن فایرفاکس می‌رود. برای نصب دائمی باید نسخهٔ امضاشده از فروشگاه افزونه‌ها باشد (هنوز منتشر نشده).
 
-فایل‌های zip (`gosast-0.1.0-chrome.zip` و `gosast-0.1.0-firefox.zip`) به هر [انتشار گیت‌هاب](https://github.com/mrzroot/gosast/releases) پیوست‌اند.
+فایل‌های zip (`gosast-0.1.1-chrome.zip` و `gosast-0.1.1-firefox.zip`) به هر [انتشار گیت‌هاب](https://github.com/mrzroot/gosast/releases) پیوست‌اند.
 
 ## 🧪 آزمون‌ها
 
