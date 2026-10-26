@@ -1,5 +1,5 @@
 // Build the Chrome/Edge and Firefox packages from src/ into dist/ and zip them.
-//   node scripts/build.mjs            -> dist/chrome, dist/firefox, dist/parpar-<version>-chrome.zip, ...-firefox.zip
+//   node scripts/build.mjs            -> dist/chrome, dist/firefox, dist/gosast-<version>-chrome.zip, ...-firefox.zip
 //   node scripts/build.mjs --test-host -> adds a throw-away copy dist/chrome-test (see e2e/README) - never released
 // Only the manifest differs between browsers; every other file is copied as is.
 import fs from 'node:fs';
@@ -20,7 +20,7 @@ export function firefoxManifest(m) {
   f.background = { scripts: ['background.js'] };
   // 142 is the first Firefox (desktop and Android) that understands data_collection_permissions
   f.browser_specific_settings = {
-    gecko: { id: 'parpar@mrzroot.github.io', strict_min_version: '142.0', data_collection_permissions: { required: ['none'] } },
+    gecko: { id: 'gosast@mrzroot.github.io', strict_min_version: '142.0', data_collection_permissions: { required: ['none'] } },
     gecko_android: { strict_min_version: '142.0' }
   };
   return f;
@@ -79,7 +79,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const v = manifest.version;
   for (const [name, m] of [['chrome', chromeManifest(manifest)], ['firefox', firefoxManifest(manifest)]]) {
     const dir = emit(name, m);
-    const zip = path.join(DIST, `parpar-${v}-${name}.zip`);
+    const zip = path.join(DIST, `gosast-${v}-${name}.zip`);
     zipDir(dir, zip);
     console.log(`${name}: ${files(dir).length} files -> ${path.relative(ROOT, zip)} (${(fs.statSync(zip).size / 1024).toFixed(1)} KB)`);
   }

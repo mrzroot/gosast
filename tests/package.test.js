@@ -22,7 +22,7 @@ test('the Firefox manifest uses an event page, has an add-on id and declares no 
   const { firefoxManifest } = await build();
   const f = firefoxManifest(manifest);
   assert.deepEqual(f.background, { scripts: ['background.js'] });
-  assert.equal(f.browser_specific_settings.gecko.id, 'parpar@mrzroot.github.io');
+  assert.equal(f.browser_specific_settings.gecko.id, 'gosast@mrzroot.github.io');
   assert.deepEqual(f.browser_specific_settings.gecko.data_collection_permissions, { required: ['none'] });
   assert.equal(manifest.background.service_worker, 'background.js', 'the source manifest must not be changed');
 });
@@ -34,7 +34,7 @@ test('the Chrome manifest is the source manifest, unchanged', async () => {
 
 test('zipDir writes a valid zip that holds every file with the right bytes', async () => {
   const { zipDir } = await build();
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'parpar-zip-'));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'gosast-zip-'));
   fs.mkdirSync(path.join(dir, 'sub'));
   fs.writeFileSync(path.join(dir, 'a.txt'), 'hello hello hello hello');
   fs.writeFileSync(path.join(dir, 'sub/b.txt'), 'سلام');
