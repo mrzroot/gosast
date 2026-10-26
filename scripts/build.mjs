@@ -18,8 +18,10 @@ export function chromeManifest(m) { return structuredClone(m); }
 export function firefoxManifest(m) {
   const f = structuredClone(m);
   f.background = { scripts: ['background.js'] };
+  // 142 is the first Firefox (desktop and Android) that understands data_collection_permissions
   f.browser_specific_settings = {
-    gecko: { id: 'parpar@mrzroot.github.io', strict_min_version: '128.0', data_collection_permissions: { required: ['none'] } }
+    gecko: { id: 'parpar@mrzroot.github.io', strict_min_version: '142.0', data_collection_permissions: { required: ['none'] } },
+    gecko_android: { strict_min_version: '142.0' }
   };
   return f;
 }
