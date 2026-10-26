@@ -1,0 +1,40 @@
+name: Bug report / گزارش خطا
+description: Something did not work, or the page was not restored properly.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping! Parpar never reads or sends your page, so please describe the page rather than pasting private content.
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+      placeholder: Chrome 156 / Edge 156 / Firefox 142
+    validations: { required: true }
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+    validations: { required: true }
+  - type: input
+    id: url
+    attributes:
+      label: Kind of page (a public link is welcome, a private one is not)
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, what did you see?
+    validations: { required: true }
+  - type: dropdown
+    id: restored
+    attributes:
+      label: Was the page back to normal after pressing Esc?
+      options: ["Yes", "No, I had to reload", "I did not try"]
+    validations: { required: true }
+  - type: textarea
+    id: console
+    attributes:
+      label: Console errors (optional)
+      render: text

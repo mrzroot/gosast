@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use Parpar, please cite it like this."
+title: "Parpar: a calm browser toy that tears a web page into paper strips and puts it back"
+type: software
+version: 0.1.0
+date-released: 2026-10-26
+license: MIT
+repository-code: "https://github.com/mrzroot/parpar"
+url: "https://mrzroot.github.io/parpar/"
+authors:
+  - family-names: Zare
+    given-names: Mohammadreza
+    alias: mrzroot
+keywords:
+  - browser extension
+  - manifest v3
+  - web toy
+  - canvas
+  - rtl

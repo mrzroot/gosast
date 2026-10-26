@@ -1,0 +1,20 @@
+name: Idea / پیشنهاد
+description: A new tool, a gentler mode, a translation, anything.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like to see?
+    validations: { required: true }
+  - type: textarea
+    id: why
+    attributes:
+      label: Why would it make Parpar nicer?
+  - type: checkboxes
+    id: promise
+    attributes:
+      label: Parpar's promises
+      options:
+        - label: I understand ideas must keep it offline, reversible and permission-light.
+          required: true
