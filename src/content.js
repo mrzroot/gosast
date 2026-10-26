@@ -59,6 +59,14 @@
       (pressed != null ? ' aria-pressed="' + pressed + '"' : '') + '>' + icon(name) + '<span>' + esc(t(labelKey)) + '</span></button>';
   }
 
+  /** Put trusted, built-in markup into `el` by parsing it (no innerHTML assignment; every value inside is escaped). */
+  function setHtml(el, html) {
+    var doc = new DOMParser().parseFromString('<!doctype html><body>' + html, 'text/html');
+    var nodes = Array.prototype.map.call(Array.prototype.slice.call(doc.body.childNodes), function (n) { return document.adoptNode(n); });   // copy the list first: adopting a node removes it from the old tree
+    while (el.firstChild) el.removeChild(el.firstChild);
+    nodes.forEach(function (n) { el.appendChild(n); });
+  }
+
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   /** Decode a data: URL into an ImageBitmap without touching fetch or <img> (page CSP cannot block this). */
@@ -74,7 +82,8 @@
     var e = state.engine, st = e ? e.stats() : { tool: 'strip', gentle: false };
     var bar = root.querySelector('.bar');
     bar.setAttribute('aria-label', t('toolbar'));
-    bar.innerHTML =
+    var focusedId = state.shadow.activeElement && state.shadow.activeElement.getAttribute && state.shadow.activeElement.getAttribute('data-id');
+    setHtml(bar,
       btn('strip', 'strip', 'shredTip', 'shred', st.tool === 'strip') +
       btn('confetti', 'confetti', 'confettiTip', 'confetti', st.tool === 'confetti') +
       btn('broom', 'broom', 'broomTip', 'broom', st.tool === 'broom') +
@@ -86,9 +95,11 @@
       btn('gentle', 'gentle', 'gentleTip', 'gentle', st.gentle) +
       btn('sound', 'sound', 'soundTip', 'sound', e ? e.sound : false) +
       '<button type="button" data-id="lang" title="' + esc(t('languageTip')) + '" lang="' + (state.lang === 'fa' ? 'en' : 'fa') + '"><span style="display:inline">' + esc(t('language')) + '</span></button>' +
-      '<button type="button" class="exit" data-id="exit" title="' + esc(t('exitTip')) + '">' + icon('exit') + '<span>' + esc(t('exit')) + '</span></button>';
+      '<button type="button" class="exit" data-id="exit" title="' + esc(t('exitTip')) + '">' + icon('exit') + '<span>' + esc(t('exit')) + '</span></button>');
+    if (focusedId) { var again = bar.querySelector('[data-id="' + focusedId + '"]'); if (again) again.focus({ preventScroll: true }); }   // keep the keyboard place
     root.setAttribute('dir', S.dir(state.lang));
     root.setAttribute('lang', state.lang);
+    root.querySelector('.hint').textContent = t('pageIsSafe');
     var count = st.total ? S.num(state.lang, st.pieces) : '';
     var pill = root.querySelector('.count');
     pill.textContent = st.pieces ? t('pieces', { n: count }) : t('intact');
@@ -136,6 +147,7 @@
       else if (k === 'r' || k === 'R') act('rewind');
       else if (k === 'g' || k === 'G') act('gentle');
       else if (k === 'm' || k === 'M') act('sound');
+      else if (k === 'l' || k === 'L') act('lang');
       else if (k === 'ArrowLeft') state.engine.kbMove(-step, 0);
       else if (k === 'ArrowRight') state.engine.kbMove(step, 0);
       else if (k === 'ArrowUp') state.engine.kbMove(0, -step);
@@ -157,9 +169,9 @@
       host.style.cssText = 'all:initial;position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:2147483647;display:block';
       var shadow = host.attachShadow({ mode: 'closed' });
       state.shadow = shadow; state.host = host;
-      shadow.innerHTML = '<style>' + CSS + '</style><div class="root" role="region"><canvas tabindex="0" role="img"></canvas>' +
+      setHtml(shadow, '<style>' + CSS + '</style><div class="root" role="region"><canvas tabindex="0" role="img"></canvas>' +
         '<div class="bar" role="toolbar"></div>' +
-        '<div class="hud"><span class="pill count" aria-live="polite"></span><span class="pill hint"></span></div></div>';
+        '<div class="hud"><span class="pill count" aria-live="polite"></span><span class="pill hint"></span></div></div>');
       var W = window.innerWidth, H = window.innerHeight;
       var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var canvas = shadow.querySelector('canvas');
@@ -167,7 +179,6 @@
         canvas: canvas, source: bitmap, width: W, height: H, dpr: window.devicePixelRatio || 1, gentle: reduce,
         onChange: function () { if (state.active) render(); }
       });
-      shadow.querySelector('.hint').textContent = t('pageIsSafe');
       document.documentElement.appendChild(host);
       render();
       setTimeout(function () { var h = shadow.querySelector('.hint'); if (h) h.style.opacity = '0'; }, 5000);
