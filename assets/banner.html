@@ -1,0 +1,34 @@
+<!doctype html><meta charset="utf-8">
+<style>
+@font-face{font-family:B;src:url(fonts/bricolage-500-800-latin.woff2);font-weight:500 800}
+@font-face{font-family:V;src:url(fonts/vazirmatn-400-800-arabic.woff2);font-weight:400 800;unicode-range:U+0600-06FF,U+FB50-FDFF,U+FE70-FEFF}
+:root{--bg:#f6ecdf;--paper:#fffaf3;--ink:#2a1a14;--sub:#7a5b4b;--pink:#ff7aa8;--pink2:#ffd9e6;--line:#e3d2bf}
+body.dark{--bg:#1d130f;--paper:#3a2820;--ink:#fff1e6;--sub:#cfae9a;--pink:#ff7aa8;--pink2:#7c3a52;--line:#4d3429}
+body{margin:0;width:1280px;height:400px;background:var(--bg);position:relative;overflow:hidden;font-family:B,V,sans-serif;color:var(--ink)}
+.sheet{position:absolute;left:760px;top:60px;width:420px;height:150px;background:var(--paper);border-radius:14px 14px 0 0;box-shadow:0 6px 20px #0002;border:1px solid var(--line);border-bottom:0}
+.sheet i{display:block;height:8px;border-radius:4px;background:var(--line);margin:22px 28px 0}
+.sheet i:nth-child(2){width:60%}.sheet i:nth-child(3){width:78%}
+.strip{position:absolute;top:210px;width:34px;border-radius:3px;background:var(--paper);border:1px solid var(--line);box-shadow:0 5px 10px #0002}
+.strip.p{background:var(--pink2)}.strip.q{background:var(--pink);border-color:var(--pink)}
+.dash{position:absolute;left:748px;top:208px;width:444px;border-top:3px dotted var(--pink)}
+h1{position:absolute;left:80px;top:92px;margin:0;font-size:132px;font-weight:800;letter-spacing:-4px;line-height:1}
+h1 small{font:700 64px V;letter-spacing:0;color:var(--pink);margin-inline-start:22px}
+p{position:absolute;left:84px;top:250px;margin:0;font-size:30px;color:var(--sub);font-weight:500}
+p b{font-weight:700;color:var(--ink)}
+.petal{position:absolute;width:26px;height:36px;background:var(--pink);border-radius:60% 0 60% 0;opacity:.9}
+</style>
+<body class="LIGHT">
+<div class="sheet"><i></i><i></i><i></i></div><div class="dash"></div>
+<div class="strip" style="left:760px;height:120px;transform:rotate(-3deg)"></div>
+<div class="strip p" style="left:812px;height:150px;transform:rotate(2deg);top:216px"></div>
+<div class="strip" style="left:864px;height:96px;transform:rotate(-1deg)"></div>
+<div class="strip q" style="left:916px;height:170px;transform:rotate(5deg);top:218px"></div>
+<div class="strip" style="left:968px;height:130px;transform:rotate(-4deg)"></div>
+<div class="strip p" style="left:1020px;height:84px;transform:rotate(3deg)"></div>
+<div class="strip" style="left:1072px;height:160px;transform:rotate(-2deg);top:214px"></div>
+<div class="strip q" style="left:1124px;height:110px;transform:rotate(6deg)"></div>
+<div class="petal" style="left:660px;top:120px;transform:rotate(30deg)"></div><div class="petal" style="left:700px;top:300px;transform:rotate(-40deg);opacity:.6"></div>
+<div class="petal" style="left:1210px;top:300px;transform:rotate(70deg);opacity:.7"></div>
+<h1>Parpar<small>پرپر</small></h1>
+<p>Tear any page into paper strips. <b>Esc puts everything back.</b></p>
+</body>
