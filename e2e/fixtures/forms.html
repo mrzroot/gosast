@@ -1,0 +1,11 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Forms sample</title>
+<style>body{font:16px system-ui;margin:0;padding:32px;background:#fff8f2;color:#2b2420}form{max-width:520px;display:grid;gap:14px}
+label{display:grid;gap:4px;font-weight:600}input,textarea,select{font:inherit;padding:8px;border:1px solid #b9a595;border-radius:8px}</style></head>
+<body><h1>Contact form</h1><form id="f" onsubmit="return false">
+<label>Name<input id="name" value="Ada Lovelace"></label>
+<label>Email<input id="email" type="email" value="ada@example.org"></label>
+<label>Message<textarea id="msg" rows="5">Please keep my draft exactly as it is.</textarea></label>
+<label>Topic<select id="topic"><option>Books</option><option selected>Paper</option><option>Ink</option></select></label>
+<label><span><input id="agree" type="checkbox" checked> I agree</span></label>
+<label><span><input type="radio" name="r" value="a"> A <input type="radio" name="r" value="b" checked> B</span></label>
+<button id="go">Send</button></form><p style="height:900px"></p></body></html>
