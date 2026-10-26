@@ -103,13 +103,21 @@
       dirtySheet = false;
     }
 
+    /** The torn-out rectangle in device pixels. Erase and repaint use the very same numbers, so no seam is left behind. */
+    function devRect(p) {
+      var x0 = Math.floor(p.sx * dpr), y0 = Math.floor(p.sy * dpr);
+      var x1 = Math.min(canvas.width, Math.ceil((p.sx + p.w) * dpr)), y1 = Math.min(canvas.height, Math.ceil((p.sy + p.h) * dpr));
+      return { x: x0, y: y0, w: Math.max(0, x1 - x0), h: Math.max(0, y1 - y0) };
+    }
     function eraseCells(p) {
-      // clear the torn-out rectangle from the sheet (slightly padded so no thin seams remain)
-      sctx.clearRect(Math.floor(p.sx * dpr) - 0, Math.floor(p.sy * dpr) - 0, Math.ceil(p.w * dpr) + 1, Math.ceil(p.h * dpr) + 1);
+      var r = devRect(p);
+      sctx.clearRect(r.x, r.y, r.w, r.h);
       dirtySheet = true;
     }
     function paintBack(p) {
-      sctx.drawImage(source, p.sx * scale, p.sy * scale, p.w * scale, p.h * scale, p.sx * dpr, p.sy * dpr, p.w * dpr, p.h * dpr);
+      var r = devRect(p), k = scale / dpr;                    // device pixel -> screenshot pixel
+      sctx.clearRect(r.x, r.y, r.w, r.h);
+      sctx.drawImage(source, r.x * k, r.y * k, r.w * k, r.h * k, r.x, r.y, r.w, r.h);
       dirtySheet = true;
     }
 
