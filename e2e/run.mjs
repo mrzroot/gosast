@@ -6,7 +6,7 @@
 //  - tearing, shredding, sweeping and gluing change the picture; rewinding brings the very same picture back
 //  - Esc removes the host and the page is byte-identical afterwards (outerHTML hash, form values, focus, scroll)
 //  - the page only ever saw two DOM changes: the host added, the host removed
-//  - no console errors, no page errors, and no network request at all while Parpar is open
+//  - no console errors, no page errors, and no network request at all while Gosast is open
 import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
@@ -47,7 +47,7 @@ async function diff(browser, a, b) {
     if (A.width !== B.width || A.height !== B.height) return 1;
     const px = (i) => { const c = document.createElement('canvas'); c.width = i.width; c.height = i.height; const x = c.getContext('2d'); x.drawImage(i, 0, 0); return x.getImageData(0, 0, i.width, i.height).data; };
     const da = px(A), db = px(B); let n = 0, total = 0;
-    // the toolbar (top) and the two small pills (bottom) are Parpar's own UI, not page content: leave them out
+    // the toolbar (top) and the two small pills (bottom) are Gosast's own UI, not page content: leave them out
     const W = A.width, top = Math.round(120 * A.height / 760), bottom = Math.round(90 * A.height / 760);
     for (let i = 0; i < da.length; i += 4) { const y = Math.floor(i / 4 / W); if (y < top || y > A.height - bottom) continue; total++; if (Math.abs(da[i] - db[i]) + Math.abs(da[i + 1] - db[i + 1]) + Math.abs(da[i + 2] - db[i + 2]) > 36) n++; }
     return n / total;
@@ -79,7 +79,7 @@ async function openOverlay(page, env) {
   // 1) the real thing: the toolbar command shortcut, delivered by X as a genuine key press
   await page.bringToFront(); await sleep(300);
   try { execFileSync('xdotool', ['key', '--clearmodifiers', 'alt+shift+k']); } catch (e) { /* no xdotool */ }
-  for (let i = 0; i < 25; i++) { if (await page.evaluate(() => !!document.querySelector('[data-parpar]'))) return 'shortcut (real activeTab grant)'; await sleep(200); }
+  for (let i = 0; i < 25; i++) { if (await page.evaluate(() => !!document.querySelector('[data-gosast]'))) return 'shortcut (real activeTab grant)'; await sleep(200); }
   return null;
 }
 
@@ -92,7 +92,7 @@ async function runPage(env, name, url, opts = {}) {
   page.on('request', (r) => { if (armed) reqs.push(r.url()); });
   await page.evaluateOnNewDocument(() => {
     window.__muts = [];
-    new MutationObserver((l) => l.forEach((m) => window.__muts.push({ t: m.type, target: m.target.nodeName, add: [...m.addedNodes].map((n) => n.nodeName + (n.hasAttribute && n.hasAttribute('data-parpar') ? '[parpar]' : '')), rem: [...m.removedNodes].map((n) => n.nodeName + (n.hasAttribute && n.hasAttribute('data-parpar') ? '[parpar]' : '')) })))
+    new MutationObserver((l) => l.forEach((m) => window.__muts.push({ t: m.type, target: m.target.nodeName, add: [...m.addedNodes].map((n) => n.nodeName + (n.hasAttribute && n.hasAttribute('data-gosast') ? '[gosast]' : '')), rem: [...m.removedNodes].map((n) => n.nodeName + (n.hasAttribute && n.hasAttribute('data-gosast') ? '[gosast]' : '')) })))
       .observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
   });
   if (opts.reduced) await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
@@ -108,7 +108,7 @@ async function runPage(env, name, url, opts = {}) {
   check(`${name}: overlay opens`, !!how, how || 'host element never appeared');
   if (!how) { armed = false; await page.close(); return; }
   await sleep(700);
-  const closed = await page.evaluate(() => { const h = document.querySelector('[data-parpar]'); return { n: document.querySelectorAll('[data-parpar]').length, shadow: h.shadowRoot === null }; });
+  const closed = await page.evaluate(() => { const h = document.querySelector('[data-gosast]'); return { n: document.querySelectorAll('[data-gosast]').length, shadow: h.shadowRoot === null }; });
   check(`${name}: exactly one host, closed shadow root`, closed.n === 1 && closed.shadow);
   const open0 = await page.screenshot({ path: `${OUT}/${name}-2-open.png` });
   check(`${name}: the open overlay looks like the page (page picture, plus a toolbar)`, (await diff(browser, shotBefore, open0)) < 0.2, '');
@@ -155,7 +155,7 @@ async function runPage(env, name, url, opts = {}) {
   // --- leave
   await page.keyboard.press('Escape'); await sleep(500);
   armed = false;
-  const gone = await page.evaluate(() => document.querySelectorAll('[data-parpar]').length);
+  const gone = await page.evaluate(() => document.querySelectorAll('[data-gosast]').length);
   check(`${name}: Esc removes the overlay`, gone === 0);
   const after = await page.evaluate(SNAP);
   check(`${name}: page HTML identical (hash ${sha(before.html)})`, sha(before.html) === sha(after.html));
@@ -164,9 +164,9 @@ async function runPage(env, name, url, opts = {}) {
   const shotAfter = await page.screenshot({ path: `${OUT}/${name}-8-after.png` });
   check(`${name}: screenshot after = screenshot before`, (await diff(browser, shotBefore, shotAfter)) < 0.002);
   const muts = await page.evaluate(() => window.__muts);
-  const ok = muts.length === 2 && muts[0].target === 'HTML' && muts[0].add.join() === 'DIV[parpar]' && muts[1].rem.join() === 'DIV[parpar]';
+  const ok = muts.length === 2 && muts[0].target === 'HTML' && muts[0].add.join() === 'DIV[gosast]' && muts[1].rem.join() === 'DIV[gosast]';
   check(`${name}: the page only saw "host added" and "host removed"`, ok, JSON.stringify(muts).slice(0, 200));
-  // On a live site the page may send its own analytics beacons; those are the site's, not Parpar's. So for pages we do not host,
+  // On a live site the page may send its own analytics beacons; those are the site's, not Gosast's. So for pages we do not host,
   // only requests from the extension (background) must be zero, and the page's own requests are listed for information.
   const own = url.startsWith(BASE);
   check(`${name}: no network requests while open`, (!own || reqs.length === 0) && env.swNet.length === 0, `page ${reqs.length}${own ? '' : ' (site\'s own, ignored)'}, background ${env.swNet.length} ${reqs.concat(env.swNet).slice(0, 3)}`);
@@ -188,7 +188,7 @@ await runPage(env, 'reduced-motion', `${BASE}/static.html`, { reduced: true });
   const p = await env.browser.newPage(); await p.goto('about:blank'); await p.bringToFront(); await sleep(300);
   try { execFileSync('xdotool', ['key', '--clearmodifiers', 'alt+shift+k']); } catch (e) {}
   await sleep(1500);
-  check('about:blank is refused (no overlay)', (await p.evaluate(() => document.querySelectorAll('[data-parpar]').length)) === 0);
+  check('about:blank is refused (no overlay)', (await p.evaluate(() => document.querySelectorAll('[data-gosast]').length)) === 0);
   await p.close();
 }
 // a real, live page (needs internet access from this machine)
