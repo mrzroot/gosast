@@ -1,5 +1,5 @@
 /*
- * Parpar content script: the overlay you actually see.
+ * Gosast content script: the overlay you actually see.
  *
  * Safety design:
  *  - The page's own DOM is never changed. We add ONE element at the end of
@@ -11,9 +11,9 @@
  */
 (function () {
   'use strict';
-  if (globalThis.__parpar) return;
+  if (globalThis.__gosast) return;
 
-  var S = globalThis.ParparStrings, E = globalThis.ParparEngine;
+  var S = globalThis.GosastStrings, E = globalThis.GosastEngine;
   var state = { active: false, host: null, engine: null, lang: 'en', prevFocus: null, off: [] };
 
   var CSS = [
@@ -122,7 +122,7 @@
   function on(target, type, fn, opts) { target.addEventListener(type, fn, opts); state.off.push(function () { target.removeEventListener(type, fn, opts); }); }
 
   /**
-   * Keyboard: while Parpar is open the page must not see keystrokes (so a focused
+   * Keyboard: while Gosast is open the page must not see keystrokes (so a focused
    * form field is never typed into). Browser shortcuts (Ctrl/Alt/Cmd) pass through.
    */
   function onKey(ev) {
@@ -134,7 +134,7 @@
 
     // a focused toolbar button keeps its normal Enter/Space and Tab behaviour
     if (inUi && (k === 'Tab' || (onButton && (k === 'Enter' || k === ' ')))) { ev.stopPropagation(); return; }
-    // the first Tab from the page moves focus into Parpar (this is the only time focus moves)
+    // the first Tab from the page moves focus into Gosast (this is the only time focus moves)
     if (k === 'Tab' && !inUi) {
       ev.preventDefault(); ev.stopImmediatePropagation();
       if (down) state.shadow.querySelector('canvas').focus({ preventScroll: true });
@@ -165,7 +165,7 @@
     return decode(dataUrl).then(function (bitmap) {
       if (!state.active) return false;
       var host = document.createElement('div');
-      host.setAttribute('data-parpar', '');
+      host.setAttribute('data-gosast', '');
       host.style.cssText = 'all:initial;position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:2147483647;display:block';
       var shadow = host.attachShadow({ mode: 'closed' });
       state.shadow = shadow; state.host = host;
@@ -209,5 +209,5 @@
     return true;
   }
 
-  globalThis.__parpar = { start: start, stop: stop, get active() { return state.active; } };
+  globalThis.__gosast = { start: start, stop: stop, get active() { return state.active; } };
 })();

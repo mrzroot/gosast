@@ -1,5 +1,5 @@
 /*
- * Parpar engine: draws a picture of a page on a canvas and lets you tear it.
+ * Gosast engine: draws a picture of a page on a canvas and lets you tear it.
  *
  * It only needs a canvas and an image of the page. It never reads or changes
  * a real web page, never uses the network and never stores anything. The
@@ -8,7 +8,7 @@
  */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(require('./core.js'));
-  else root.ParparEngine = factory(root.ParparCore);
+  else root.GosastEngine = factory(root.GosastCore);
 })(typeof self !== 'undefined' ? self : this, function (Core) {
   'use strict';
 

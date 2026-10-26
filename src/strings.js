@@ -1,17 +1,17 @@
 /*
- * Parpar UI strings: English and Persian. Plain data plus two helpers, so the
+ * Gosast UI strings: English and Persian. Plain data plus two helpers, so the
  * unit tests can check that both languages stay in sync.
  */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory();
-  else root.ParparStrings = factory();
+  else root.GosastStrings = factory();
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 
   var STRINGS = {
     en: {
-      name: 'Parpar',
-      toolbar: 'Parpar tools',
+      name: 'Gosast',
+      toolbar: 'Gosast tools',
       canvasLabel: 'The page, ready to be torn. Use the arrow keys to move the tool, Enter to start or stop tearing, Escape to put everything back.',
       shred: 'Strips',
       shredTip: 'Tear tall paper strips (1)',
@@ -38,12 +38,12 @@
       pageIsSafe: 'Your real page is untouched underneath. Esc puts it back.',
       toolOn: 'on',
       toolOff: 'off',
-      cannotRun: 'Parpar cannot run on this page',
+      cannotRun: 'Gosast cannot run on this page',
       actionTitle: 'Tear this page (calm toy)'
     },
     fa: {
-      name: 'پرپر',
-      toolbar: 'ابزارهای پرپر',
+      name: 'گسست',
+      toolbar: 'ابزارهای گسست',
       canvasLabel: 'صفحه آماده‌ی پاره شدن است. با کلیدهای جهت‌دار ابزار را حرکت بده، با Enter پاره کردن را شروع یا متوقف کن، و با Escape همه چیز را سر جایش برگردان.',
       shred: 'نوار',
       shredTip: 'نوارهای بلند کاغذی ببر (۱)',
@@ -70,8 +70,8 @@
       pageIsSafe: 'صفحه‌ی واقعی زیر این لایه دست‌نخورده است. با Esc برمی‌گردد.',
       toolOn: 'روشن',
       toolOff: 'خاموش',
-      cannotRun: 'پرپر روی این صفحه کار نمی‌کند',
-      actionTitle: 'این صفحه را پرپر کن (اسباب‌بازی آرام)'
+      cannotRun: 'گسست روی این صفحه کار نمی‌کند',
+      actionTitle: 'این صفحه را پاره کن (اسباب‌بازی آرام)'
     }
   };
 

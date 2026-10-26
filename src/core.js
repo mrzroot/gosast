@@ -1,5 +1,5 @@
 /*
- * Parpar core: the pure maths of tearing a page into pieces.
+ * Gosast core: the pure maths of tearing a page into pieces.
  *
  * Nothing in this file touches the DOM, the canvas or the network, so it can
  * be unit-tested in plain Node. The engine (engine.js) wires it to a canvas.
@@ -15,7 +15,7 @@
  */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory();
-  else root.ParparCore = factory();
+  else root.GosastCore = factory();
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 

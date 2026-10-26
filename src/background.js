@@ -1,5 +1,5 @@
 /*
- * Parpar background script.
+ * Gosast background script.
  *
  * Clicking the toolbar button (or pressing Alt+Shift+K) does three things on
  * the current tab, all inside this browser:
@@ -27,17 +27,17 @@ async function toggle(tab) {
   const target = { tabId: tab.id };
   try {
     // already open? then close it
-    const [probe] = await api.scripting.executeScript({ target, func: () => !!(globalThis.__parpar && globalThis.__parpar.active) });
+    const [probe] = await api.scripting.executeScript({ target, func: () => !!(globalThis.__gosast && globalThis.__gosast.active) });
     if (probe && probe.result) {
-      await api.scripting.executeScript({ target, func: () => globalThis.__parpar.stop() });
+      await api.scripting.executeScript({ target, func: () => globalThis.__gosast.stop() });
       return;
     }
     // take the picture BEFORE anything is added to the page, so the overlay is not in it
     const dataUrl = await api.tabs.captureVisibleTab(tab.windowId, { format: 'png' });
     await api.scripting.executeScript({ target, files: FILES });
-    await api.scripting.executeScript({ target, func: (url) => globalThis.__parpar.start(url), args: [dataUrl] });
+    await api.scripting.executeScript({ target, func: (url) => globalThis.__gosast.start(url), args: [dataUrl] });
   } catch (e) {
-    console.warn('Parpar could not start on this tab:', e && e.message);
+    console.warn('Gosast could not start on this tab:', e && e.message);
     flagProblem(tab.id);
   }
 }
