@@ -1,7 +1,7 @@
 /*
  * Parpar background script.
  *
- * Clicking the toolbar button (or pressing Alt+Shift+P) does three things on
+ * Clicking the toolbar button (or pressing Alt+Shift+K) does three things on
  * the current tab, all inside this browser:
  *   1. takes a picture of the visible part of the page (needs only "activeTab"),
  *   2. injects the engine files into that tab,
@@ -37,6 +37,7 @@ async function toggle(tab) {
     await api.scripting.executeScript({ target, files: FILES });
     await api.scripting.executeScript({ target, func: (url) => globalThis.__parpar.start(url), args: [dataUrl] });
   } catch (e) {
+    console.warn('Parpar could not start on this tab:', e && e.message);
     flagProblem(tab.id);
   }
 }
