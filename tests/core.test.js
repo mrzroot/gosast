@@ -198,9 +198,10 @@ test('settleAll keeps well-supported pieces asleep', () => {
 });
 
 test('shove wakes a resting piece and moves it sideways', () => {
-  const W = 200, H = 300, field = C.makeField(W);
+  // wide room and a piece near the left, so the shove cannot run into the right wall
+  const W = 800, H = 300, field = C.makeField(W);
   const g = C.makeGrid(W, H);
-  const [p] = C.extractPieces(g, [10], 'confetti');
+  const [p] = C.extractPieces(g, [3], 'confetti');
   simulate([p], { W, H, field, gentle: false }, 3);
   const x0 = p.x;
   C.shove(p, 400, 0);
