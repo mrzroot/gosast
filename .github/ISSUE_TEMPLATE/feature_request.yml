@@ -10,11 +10,11 @@ body:
   - type: textarea
     id: why
     attributes:
-      label: Why would it make Parpar nicer?
+      label: Why would it make Gosast nicer?
   - type: checkboxes
     id: promise
     attributes:
-      label: Parpar's promises
+      label: Gosast's promises
       options:
         - label: I understand ideas must keep it offline, reversible and permission-light.
           required: true

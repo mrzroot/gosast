@@ -2,10 +2,10 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.png">
-  <img alt="Parpar — tear any page into paper strips. Esc puts everything back." src="assets/banner-light.png" width="100%">
+  <img alt="Gosast — tear any page into paper strips. Esc puts everything back." src="assets/banner-light.png" width="100%">
 </picture>
 
-**English** · [فارسی](README.fa.md) · [🌸 Live demo](https://mrzroot.github.io/parpar/)
+**English** · [فارسی](README.fa.md) · [🌸 Live demo](https://mrzroot.github.io/gosast/)
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-b3365f.svg)](LICENSE)
 [![Manifest V3](https://img.shields.io/badge/manifest-V3-5b3a2e.svg)](src/manifest.json)
@@ -15,7 +15,7 @@
 
 </div>
 
-**Parpar** (Persian *پرپر*, "petals pulled apart") is a small, calm browser toy. Click the button, and the page you are looking at turns into a sheet of paper on a desk. Tear it into strips, scatter confetti, sweep the pieces into a pile, glue some back, or feed the whole sheet to the shredder. Press **Esc** and the real page is exactly as you left it. 🌸
+**Gosast** (Persian *گسست*, "a clean breaking apart") is a small, calm browser toy. Click the button, and the page you are looking at turns into a sheet of paper on a desk. Tear it into strips, scatter confetti, sweep the pieces into a pile, glue some back, or feed the whole sheet to the shredder. Press **Esc** and the real page is exactly as you left it. 🌸
 
 It is made for a quiet minute, not for stress: soft paper sounds (off by default), a **gentle mode** that fades instead of falling, and an undo for everything.
 
@@ -32,16 +32,16 @@ It is made for a quiet minute, not for stress: soft paper sounds (off by default
 | `G` | 🍃 **Gentle** | Pieces drift and fade (on automatically if your system asks for reduced motion) |
 | `M` | 🔈 **Sound** | Synthesized paper sounds, off by default |
 | `L` | 🌐 **Language** | Switch the toolbar between English and فارسی |
-| `Esc` | 🌷 **Put it back** | Closes Parpar. The page is untouched |
+| `Esc` | 🌷 **Put it back** | Closes Gosast. The page is untouched |
 
 Everything works with the keyboard too: arrow keys move a virtual pointer (hold `Shift` for bigger steps), `Enter` or `Space` presses and releases. The interface comes in **English and فارسی** (right-to-left aware) and follows your browser language.
 
 ## 🔒 Privacy
 
-- **No network.** Parpar makes no requests at all. There are no servers, no analytics, no accounts.
-- **No data collection.** Nothing about a page is stored, logged or sent. The picture of the page lives in memory until you close Parpar.
-- **Tiny permissions.** Only `activeTab` and `scripting`, and no host permissions. Parpar can only run on a tab *after* you click its button (or press its shortcut), and only on that tab.
-- **Reversible.** Parpar never edits your page. See below.
+- **No network.** Gosast makes no requests at all. There are no servers, no analytics, no accounts.
+- **No data collection.** Nothing about a page is stored, logged or sent. The picture of the page lives in memory until you close Gosast.
+- **Tiny permissions.** Only `activeTab` and `scripting`, and no host permissions. Gosast can only run on a tab *after* you click its button (or press its shortcut), and only on that tab.
+- **Reversible.** Gosast never edits your page. See below.
 
 ## 🧵 How it works
 
@@ -50,15 +50,15 @@ Everything works with the keyboard too: arrow keys move a virtual pointer (hold 
 3. The scripts draw that picture onto a `<canvas>` inside a **closed shadow-DOM overlay** covering the viewport. All the tearing happens on the picture: it is cut into 14 px cells, strips are runs of cells, and a small physics step makes the pieces fall, stack in a pile height-field and fly home on springs.
 4. Your real page is **never modified**. The only change in its DOM is one overlay element, added at the start and removed on exit. Forms keep their values, focus and scroll position; keystrokes are swallowed while the overlay is open so typing cannot reach a field.
 
-Because it is a picture, Parpar works the same on any page, whatever its CSP, frameworks or shadow DOM.
+Because it is a picture, Gosast works the same on any page, whatever its CSP, frameworks or shadow DOM.
 
 ## 📦 Install from source
 
 You need Node 18+ only to build the zip files; the extension itself has no dependencies.
 
 ```bash
-git clone https://github.com/mrzroot/parpar.git
-cd parpar
+git clone https://github.com/mrzroot/gosast.git
+cd gosast
 npm test            # 34 unit tests
 npm run build       # creates dist/chrome, dist/firefox and the two zip files
 ```
@@ -73,7 +73,7 @@ npm run build       # creates dist/chrome, dist/firefox and the two zip files
 2. Choose `dist/firefox/manifest.json`.
 3. Temporary add-ons disappear when Firefox closes. For a permanent install you need the signed release from the add-on store (not published yet).
 
-Release zips (`parpar-0.1.0-chrome.zip`, `parpar-0.1.0-firefox.zip`) are attached to each [GitHub release](https://github.com/mrzroot/parpar/releases).
+Release zips (`gosast-0.1.0-chrome.zip`, `gosast-0.1.0-firefox.zip`) are attached to each [GitHub release](https://github.com/mrzroot/gosast/releases).
 
 ## 🧪 Tests
 
@@ -82,8 +82,8 @@ Release zips (`parpar-0.1.0-chrome.zip`, `parpar-0.1.0-firefox.zip`) are attache
 
 ## 🚧 Limits
 
-- It tears a **picture of the visible part** of the page, not the whole scrolling document. The page cannot scroll while Parpar is open.
-- Resizing the window closes Parpar (the picture would no longer fit).
+- It tears a **picture of the visible part** of the page, not the whole scrolling document. The page cannot scroll while Gosast is open.
+- Resizing the window closes Gosast (the picture would no longer fit).
 - It does not run on browser pages (`chrome://`, the add-on stores, `about:`), and PDFs in the built-in viewer are not supported.
 - Videos and animations are frozen at the moment of the picture.
 - Very large screens with thousands of pieces can slow down on old computers; the piece count is capped at 5000.
@@ -100,4 +100,4 @@ Release zips (`parpar-0.1.0-chrome.zip`, `parpar-0.1.0-firefox.zip`) are attache
 
 ## 📄 License
 
-[MIT](LICENSE) © 2026 Mohammadreza Zare ([@mrzroot](https://github.com/mrzroot)). Parpar is an original work. If you use it in research or a blog, [CITATION.cff](CITATION.cff) has a ready-made citation.
+[MIT](LICENSE) © 2026 Mohammadreza Zare ([@mrzroot](https://github.com/mrzroot)). Gosast is an original work. If you use it in research or a blog, [CITATION.cff](CITATION.cff) has a ready-made citation.
