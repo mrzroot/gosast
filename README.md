@@ -5,8 +5,10 @@
   <img alt="Gosast — tear any page into paper strips. Esc puts everything back." src="assets/banner-light.png" width="100%">
 </picture>
 
-**English** · [فارسی](README.fa.md) · [🌸 Live demo](https://mrzroot.github.io/gosast/)
+**English** · [فارسی](README.fa.md) · [🌸 Live demo](https://mrzroot.github.io/gosast/) · [📦 Release v0.1.1](https://github.com/mrzroot/gosast/releases/tag/v0.1.1) · [🗒 Changelog](CHANGELOG.md)
 
+[![Version](https://img.shields.io/badge/version-0.1.1-b3365f.svg)](CHANGELOG.md)
+[![Tests](https://img.shields.io/badge/tests-34%20unit%20%2B%2088%20e2e%20checks-5b3a2e.svg)](#-tests)
 [![License: MIT](https://img.shields.io/badge/license-MIT-b3365f.svg)](LICENSE)
 [![Manifest V3](https://img.shields.io/badge/manifest-V3-5b3a2e.svg)](src/manifest.json)
 [![Permissions](https://img.shields.io/badge/permissions-activeTab%20%2B%20scripting-ff7aa8.svg)](#-privacy)
@@ -18,6 +20,17 @@
 **Gosast** (Persian *گسست*, "a clean breaking apart") is a small, calm browser toy. Click the button, and the page you are looking at turns into a sheet of paper on a desk. Tear it into strips, scatter confetti, sweep the pieces into a pile, glue some back, or feed the whole sheet to the shredder. Press **Esc** and the real page is exactly as you left it. 🌸
 
 It is made for a quiet minute, not for stress: soft paper sounds (off by default), a **gentle mode** that fades instead of falling, and an undo for everything.
+
+<p align="center">
+  <img src="docs/demo.gif" alt="Gosast on a test page: the page, the toolbar, torn strips, a sweep, shred all, then rewind back to the untouched page" width="720">
+  <br><sub>Real frames from the end-to-end run in Chrome (<code>npm run e2e</code>): open, strips, broom, shred all, rewind, Esc.</sub>
+</p>
+
+## 🚀 Quick start
+
+1. Download `gosast-0.1.1-chrome.zip` (or `-firefox.zip`) from the [latest release](https://github.com/mrzroot/gosast/releases/latest) and unzip it into a new folder.
+2. Chrome / Edge: open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked** and pick the unzipped folder. Firefox: see [Install from source](#-install-from-source).
+3. Open any web page and click the 🌸 button (or press `Alt+Shift+K`). Press `1`–`4` to pick a tool, `S` to shred, **Esc** to put the page back.
 
 ## ✨ What you can do
 
@@ -97,6 +110,10 @@ Release zips (`gosast-0.1.1-chrome.zip`, `gosast-0.1.1-firefox.zip`) are attache
 - [ ] More tools: scissors lines, tape, a gust of wind
 - [ ] Save a picture of the torn page as a PNG
 - [ ] More languages (translations are welcome, see `src/strings.js`)
+
+## 🤝 Contributing
+
+Bug reports, Firefox test reports and translations are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and the ground rules (no new permissions, no network, never touch the page), and use the [issue forms](https://github.com/mrzroot/gosast/issues/new/choose).
 
 ## 📄 License
 

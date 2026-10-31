@@ -5,8 +5,10 @@
   <img alt="گسست — هر صفحه‌ای را نوار‌نوار کن. با Esc همه‌چیز سر جایش برمی‌گردد." src="assets/banner-light.png" width="100%">
 </picture>
 
-[English](README.md) · **فارسی** · [🌸 نمونهٔ زنده](https://mrzroot.github.io/gosast/)
+[English](README.md) · **فارسی** · [🌸 نمونهٔ زنده](https://mrzroot.github.io/gosast/) · [📦 نسخهٔ v0.1.1](https://github.com/mrzroot/gosast/releases/tag/v0.1.1) · [🗒 تغییرات](CHANGELOG.md)
 
+[![Version](https://img.shields.io/badge/version-0.1.1-b3365f.svg)](CHANGELOG.md)
+[![Tests](https://img.shields.io/badge/tests-34%20unit%20%2B%2088%20e2e%20checks-5b3a2e.svg)](CONTRIBUTING.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-b3365f.svg)](LICENSE)
 [![Manifest V3](https://img.shields.io/badge/manifest-V3-5b3a2e.svg)](src/manifest.json)
 [![Permissions](https://img.shields.io/badge/permissions-activeTab%20%2B%20scripting-ff7aa8.svg)](#-حریم-خصوصی)
@@ -19,6 +21,17 @@
 **گسست** (Gosast، یعنی «از هم جدا شدنِ تمیز») یک اسباب‌بازی کوچک و آرام برای مرورگر است. دکمه را بزنید؛ صفحه‌ای که جلوی شماست تبدیل می‌شود به یک ورق کاغذ روی میز. می‌توانید آن را نوار‌نوار کنید، کاغذپاره بپاشید، تکه‌ها را با جارو کنار بزنید، چسب بزنید و برگردانید، یا کل ورق را بدهید به کاغذخردکن. با **Esc** صفحهٔ واقعی دقیقاً همان‌طور که بود برمی‌گردد. 🌸
 
 برای یک دقیقهٔ آرام ساخته شده، نه برای عصبانیت: صدای ملایم کاغذ (به‌طور پیش‌فرض خاموش)، **حالت آرام** که تکه‌ها به‌جای افتادن محو می‌شوند، و برگشتِ همه‌چیز.
+
+<p align="center">
+  <img src="docs/screenshot-rtl-strips.png" alt="گسست روی یک صفحهٔ فارسی راست‌به‌چپ: نوارهای کاغذی پاره‌شده و نوار ابزار" width="720">
+  <br><sub>عکس واقعی از اجرای آزمون سرتاسری در کروم (<code>npm run e2e</code>) روی صفحهٔ فارسی راست‌به‌چپ. <a href="docs/demo.gif">نمایش متحرک</a></sub>
+</p>
+
+## 🚀 شروع سریع
+
+۱. فایل `gosast-0.1.1-chrome.zip` (یا `-firefox.zip`) را از [آخرین انتشار](https://github.com/mrzroot/gosast/releases/latest) بگیرید و در یک پوشهٔ تازه باز کنید.
+۲. کروم / اج: `chrome://extensions` را باز کنید، **Developer mode** را روشن کنید، **Load unpacked** را بزنید و همان پوشه را انتخاب کنید. فایرفاکس: بخش [نصب از روی سورس](#-نصب-از-روی-سورس) را ببینید.
+۳. یک صفحهٔ وب باز کنید و دکمهٔ 🌸 را بزنید (یا `Alt+Shift+K`). با `1` تا `4` ابزار را انتخاب کنید، با `S` همه را خرد کنید و با **Esc** صفحه را برگردانید.
 
 ## ✨ چه کارهایی می‌شود کرد
 
@@ -98,6 +111,10 @@ npm run build       # dist/chrome و dist/firefox و دو فایل zip را می
 - [ ] ابزارهای بیشتر: خط قیچی، چسب نواری، وزش باد
 - [ ] ذخیرهٔ تصویر صفحهٔ پاره‌شده به‌صورت PNG
 - [ ] زبان‌های بیشتر (ترجمه‌ها خوش‌آمدند، `src/strings.js` را ببینید)
+
+## 🤝 مشارکت
+
+گزارش اشکال، گزارش آزمون در فایرفاکس و ترجمه خوش‌آمدند. راه‌اندازی و قواعد (بدون دسترسی تازه، بدون شبکه، هرگز دست نزدن به خود صفحه) در [CONTRIBUTING.md](CONTRIBUTING.md) آمده است؛ برای گزارش از [فرم‌های issue](https://github.com/mrzroot/gosast/issues/new/choose) استفاده کنید.
 
 ## 📄 مجوز
 
