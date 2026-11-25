@@ -4,6 +4,8 @@ All notable changes to Gosast. Dates are release dates (YYYY-MM-DD).
 
 ## Unreleased
 
+- Added a bilingual project walkthrough with a practical, reproducible first-use workflow. Documentation only; no runtime changes.
+
 - Docs only: a demo GIF and a right-to-left screenshot (both taken from the real-Chrome end-to-end run), this changelog, CONTRIBUTING.md and a pull-request template. No change to the extension.
 
 ## 0.1.1 (2026-10-26)

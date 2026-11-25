@@ -15,6 +15,10 @@
 [![Network](https://img.shields.io/badge/network-none-2a1a14.svg)](#-privacy)
 [![Chrome · Edge · Firefox](https://img.shields.io/badge/Chrome%20%C2%B7%20Edge%20%C2%B7%20Firefox-ready-7a2e48.svg)](#-install-from-source)
 
+
+
+[Project walkthrough · راهنمای عملی پروژه](docs/project-guide.html)
+
 </div>
 
 **Gosast** (Persian *گسست*, "a clean breaking apart") is a small, calm browser toy. Click the button, and the page you are looking at turns into a sheet of paper on a desk. Tear it into strips, scatter confetti, sweep the pieces into a pile, glue some back, or feed the whole sheet to the shredder. Press **Esc** and the real page is exactly as you left it. 🌸
